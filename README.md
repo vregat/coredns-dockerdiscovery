@@ -12,6 +12,7 @@ Syntax
 ------
 
     docker [DOCKER_ENDPOINT] {
+        reverse_proxy   REVERSE_PROXY_IP
         domain DOMAIN_NAME
         hostname_domain HOSTNAME_DOMAIN_NAME
         network_aliases DOCKER_NETWORK
@@ -19,6 +20,7 @@ Syntax
     }
 
 * `DOCKER_ENDPOINT`: the path to the docker socket. If unspecified, defaults to `unix:///var/run/docker.sock`. It can also be TCP socket, such as `tcp://127.0.0.1:999`.
+* `REVERSE_PROXY_IP`: the public IP of the reverse proxy
 * `DOMAIN_NAME`: the name of the domain for [container name](https://docs.docker.com/engine/reference/run/#name---name), e.g. when `DOMAIN_NAME` is `docker.loc`, your container with `my-nginx` (as subdomain) [name](https://docs.docker.com/engine/reference/run/#name---name) will be assigned the domain name: `my-nginx.docker.loc`
 * `HOSTNAME_DOMAIN_NAME`: the name of the domain for [hostname](https://docs.docker.com/config/containers/container-networking/#ip-address-and-hostname). Work same as `DOMAIN_NAME` for hostname.
 * `DOCKER_NETWORK`: the name of the docker network. Resolve directly by [network aliases](https://docs.docker.com/v17.09/engine/userguide/networking/configure-dns) (like internal docker dns resolve host by aliases whole network)

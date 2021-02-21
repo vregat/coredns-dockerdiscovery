@@ -9,7 +9,7 @@ RUN echo "docker:github.com/sywide/coredns-dockerdiscovery" >> plugin.cfg
 ENV CGO_ENABLED=0
 RUN go generate coredns.go && go build -mod=mod -o=/usr/local/bin/coredns
 
-FROM alpine:3.13.3
+FROM alpine:3.12.3
 
 RUN apk --no-cache add ca-certificates
 COPY --from=0 /usr/local/bin/coredns /usr/local/bin/coredns

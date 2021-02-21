@@ -1,9 +1,8 @@
 module github.com/sywide/coredns-dockerdiscovery
 
-go 1.15
+go 1.16
 
 require (
-	github.com/caddyserver/caddy v1.0.5
 	github.com/coredns/caddy v1.1.0
 	github.com/coredns/coredns v1.8.1
 	github.com/fsouza/go-dockerclient v1.7.1
