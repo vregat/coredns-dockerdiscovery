@@ -1,12 +1,11 @@
 package dockerdiscovery
 
 import (
+	"github.com/coredns/caddy"
 	"github.com/coredns/coredns/core/dnsserver"
 	"github.com/coredns/coredns/plugin"
 
 	dockerapi "github.com/fsouza/go-dockerclient"
-
-	"github.com/caddyserver/caddy"
 )
 
 const defaultDockerEndpoint = "unix:///var/run/docker.sock"
@@ -70,6 +69,11 @@ func createPlugin(c *caddy.Controller) (DockerDiscovery, error) {
 					return dd, c.ArgErr()
 				}
 				labelResolver.hostLabel = c.Val()
+			case "reverse_proxy":
+				if !c.NextArg() {
+					return dd, c.ArgErr()
+				}
+				dd.reverseProxy = c.Val()
 			default:
 				return dd, c.Errf("unknown property: '%s'", c.Val())
 			}
