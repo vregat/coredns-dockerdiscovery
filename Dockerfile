@@ -10,8 +10,12 @@ ENV CGO_ENABLED=0
 RUN go generate coredns.go && go build -mod=mod -o=/usr/local/bin/coredns
 
 FROM alpine:3.12.3
+LABEL maintainer="dev@comonway.com"
 
 RUN apk --no-cache add ca-certificates
 COPY --from=0 /usr/local/bin/coredns /usr/local/bin/coredns
 
+EXPOSE 53 53/udp
+VOLUME ["/etc/coredns"]
 ENTRYPOINT ["/usr/local/bin/coredns"]
+CMD ["-conf", "/etc/coredns/Corefile"]
