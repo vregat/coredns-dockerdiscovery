@@ -1,4 +1,4 @@
-module github.com/sywide/coredns-dockerdiscovery
+module github.com/vregat/coredns-dockerdiscovery
 
 go 1.16
 
