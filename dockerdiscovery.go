@@ -108,6 +108,12 @@ func (dd DockerDiscovery) Name() string {
 }
 
 func (dd DockerDiscovery) getContainerAddress(container *dockerapi.Container) (net.IP, error) {
+	labelIP, hasLabelIP := container.Config.Labels["coredns.dockerdiscovery.ip"]
+	
+	if hasLabelIP {
+		return net.ParseIP(labelIP), nil
+	}
+	
 	for {
 		if container.NetworkSettings.IPAddress != "" {
 			return net.ParseIP(container.NetworkSettings.IPAddress), nil
