@@ -75,6 +75,7 @@ func (dd DockerDiscovery) containerInfoByDomain(requestName string) (*ContainerI
 func (dd DockerDiscovery) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg) (int, error) {
 	state := request.Request{W: w, Req: r}
 	var answers []dns.RR
+	log.Printf("[VREGAT] QType: %s, QName: %s", state.QType(), state.QName())
 	switch state.QType() {
 	case dns.TypeA:
 		containerInfo, _ := dd.containerInfoByDomain(state.QName())
